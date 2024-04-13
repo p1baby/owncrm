@@ -1,0 +1,15 @@
+version: '2'
+services:
+  server:
+    build: .
+  nginx:
+    image: nginx:1.23.2
+    restart: always
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/templates/default.conf.template
+    depends_on:
+      - server
+    environment:
+      PROXY_HOST: localhost
